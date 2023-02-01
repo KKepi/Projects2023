@@ -1,0 +1,85 @@
+# sibenice
+
+def nastaveni_hry():
+    slovo = input("zadejte tajenku: ")
+    tajenka = []
+    sibenice = []
+    
+    for pismenko in slovo:
+        tajenka.append(pismenko)
+        sibenice.append("_")
+    
+    
+    # zadani obtiznosti
+    obtiznosti = [("tezka", 3), ("stredni", 5), ("lehka", 10)]
+    print(obtiznosti)
+    obtiznost = input("zadejte obtiznost hry: ")
+    
+    for text, cislo in obtiznosti:
+        if text == obtiznost:
+            pokusy = cislo
+    
+    jmeno = input("zadejte jmeno: ")
+    
+    return tajenka, sibenice, pokusy, slovo, jmeno
+
+def hra(tajenka, sibenice, pokusy, slovo, jmeno):
+    hadane_pismena = []
+    cislo = pokusy/100/10000
+    skore = 0
+    
+    while slovo != "".join(sibenice):
+        
+        if pokusy == 0:
+            skore = 0
+            hrac = (jmeno, hrac)
+            return hrac, pokusy
+        
+        
+        print(f"pouzite pismenka: {hadane_pismena}"), print(f"pokusy: {pokusy}"), print(f"skore: {skore}")
+        print(*sibenice)
+        
+        hadane_pismenko = input("zadejte pismenko: ")
+        
+        if hadane_pismenko in hadane_pismena:
+            while hadane_pismenko not in hadane_pismena:
+                print("toto pismenko jste jiz pouzil! zkuste jine")
+                hadane_pismenko = input(": ")
+        
+        if hadane_pismenko in tajenka:
+            print("to je spravne!\n")
+            
+            while hadane_pismenko in tajenka:
+                index = tajenka.index(hadane_pismenko)
+                tajenka[index] = "_"
+                sibenice[index] = hadane_pismenko
+                
+                
+            skore += pokusy*cislo*100
+            hadane_pismena.append(hadane_pismenko)
+            
+        
+        else:
+            print("toto pismenko se tam nenachazi!\n")
+            hadane_pismena.append(hadane_pismenko)
+            pokusy -= 1
+    
+    hrac = (jmeno, skore)
+    return hrac, pokusy
+    
+def main():
+    tajenka, sibenice, pokusy, slovo, jmeno = nastaveni_hry()
+    print(tajenka, sibenice, pokusy, slovo, jmeno)
+    hrac, pokusy_na_konci_hry = hra(tajenka, sibenice, pokusy, slovo, jmeno)
+    if pokusy > 0:
+        print("vyhra")
+    else:
+        print("prohra")
+    
+    
+    with open("skore_vyhry.txt", "a") as file1:
+        file1.write(f"jmeno: {hrac[0]} / skore: {hrac[1]} \n")
+        file1.write("")
+    
+main()
+        
