@@ -1,0 +1,64 @@
+import random
+
+#zacatek hry
+
+def zacatek_hry():
+    print("Vitejte, hrajete na poli 25 policek dlouhem a 5 policek sirokem")
+    print("ovladani: \nvpred : n\nvlevo : w\nvpravo : e\nvzad : s")
+    
+def hra(prekazky: list):
+    pozice = [0,0]
+    vysledek_hry = ""
+    
+    while vysledek_hry != "vyhra" or vysledek_hry != "prohra":
+        
+        print(pozice)
+        volba = input("zadejte smer: ")
+        
+    #krok zpet
+        if volba == "s":
+            if pozice[1] > 0:
+                pozice[1] = pozice[1] - 1
+            else:
+                print("tam nemuzete")
+    #krok vpred
+        elif volba == "n":
+            if pozice[1] < 25:
+                pozice[1] = pozice[1] + 1
+            else:
+                vysledek_hry = "vyhra"
+                return vysledek_hry
+    #krok vlevo
+        elif volba == "w":
+            if pozice[0] != -2:
+                pozice[0] = pozice[0] - 1
+            else:
+                print("tam nemuzete")
+    #krok vpravo
+        elif volba == "e":
+            if pozice[0] != 2:
+                pozice[0] = pozice[0] + 1
+            else:
+                print("tam nemuzete")
+        else:
+            print("nezadal jste platny smer")
+    
+    #srazka s prekazkou
+        for prekazka in prekazky:
+            if tuple(pozice) == prekazka:
+                vysledek_hry = "prohra"
+                return vysledek_hry
+    
+def napsane_prekazky():
+    prekazky = [(random.randint(-2, 2), random.randint(0, 25)),(random.randint(-2, 2), random.randint(0, 25)),(random.randint(-2, 2), random.randint(0, 25)),(random.randint(-2, 2), random.randint(0, 25)),(random.randint(-2, 2), random.randint(0, 25)),(random.randint(-2, 2), random.randint(0, 25)),(random.randint(-2, 2), random.randint(0, 25)),(random.randint(-2, 2), random.randint(0, 25))]
+    
+    return prekazky
+
+def main():
+    zacatek_hry()
+    prekazky = napsane_prekazky()
+    print(prekazky)
+    print(hra(prekazky))
+
+if __name__ == "__main__":
+    main()
