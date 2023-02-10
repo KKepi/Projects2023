@@ -1,0 +1,17 @@
+
+
+
+def prvocislo_v_oblasti(n):
+    
+    prvocisla = [1,2,3]
+    cislo = 3
+    
+    while len(prvocisla) != n:                                    # dokud v seznamu nebude tolik prvocisel, kolikate hledame tak pridavej prvocisla
+        cislo += 1
+        
+        if cislo % 2 != 0 and cislo % 3 != 0:
+            prvocisla.append(cislo)
+            
+    return prvocisla[n-1]                                         # az bude tolik prvocisel, kolikate prvocislo hledame tak 
+                                                                  # vrat ze seznamu prvocislo s pozici = [kolik prvocisel v seznamu je]
+print(prvocislo_v_oblasti(10001))
