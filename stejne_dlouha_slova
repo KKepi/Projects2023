@@ -1,0 +1,37 @@
+def stejne_dlouhe_slova_ve_vete(veta: str):
+    
+    seznam = []
+    
+    veta = veta.split()
+    
+    
+    for slovo_1 in veta:
+        
+        # seznam predelam na prazdny, abych do nej mohl pridavat nove vysledky
+        
+        stejne_dlouhe_slova = []
+        
+        # pro kazde slovo hledam "porovnavane_slovo" ze stejne vety
+        
+        for porovnavane_slova in veta:
+            
+            # pokud se delka slova_1 == porovnavanemu slovu a zaroven nejsou stejna pak toto slovo pridam na provizorni seznam "stejne_dlouhe_slova" a zaroven porovnavane slovo smazu, aby se pri dalsim slovu_1 nenasla shoda
+            
+            if len(slovo_1) == len(porovnavane_slova) and slovo_1 != porovnavane_slova:
+                stejne_dlouhe_slova.append(porovnavane_slova)
+                veta.remove(porovnavane_slova)
+        
+        
+        # nakonec pridam slovo_1
+        
+        stejne_dlouhe_slova.append(slovo_1)
+        
+        # a do seznamu jeste pridam kolik slov se tam nachazi
+        
+        stejne_dlouhe_slova.append(len(stejne_dlouhe_slova))
+        
+        # seznam pak predelam na tuple
+        
+        seznam.append(tuple(stejne_dlouhe_slova))
+    
+    return print(seznam)
