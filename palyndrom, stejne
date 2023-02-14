@@ -1,0 +1,22 @@
+def a(veta: str):
+    palyndrom = True
+    stejne = True
+    
+    veta_seznam = []
+    
+    for pismenko in veta:
+        veta_seznam.append(pismenko)
+    
+    # palyndrom
+    for i in range(1, len(veta_seznam)+1):
+        print(veta_seznam[i-1], veta_seznam[-i])
+        if veta_seznam[i-1] != veta_seznam[-i]:
+            palyndrom = False
+            
+    # stejne casti
+    d = len(veta_seznam)//2
+    for i in range(0, d):
+        if veta_seznam[i] != veta_seznam[d+i]:
+            stejne = False
+    
+    return palyndrom, stejne
