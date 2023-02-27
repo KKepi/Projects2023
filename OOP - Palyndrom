@@ -1,0 +1,56 @@
+
+
+
+class Palyndrom:
+    
+    def __init__(self, slovo: str):
+        
+        veta = []
+        for pismenko in slovo:
+            veta.append(pismenko)
+        
+        self._veta = veta
+    
+    def precti_rear(self):
+        
+        return self._veta[0]
+    
+    def precti_front(self):
+        
+        return self._veta[-1]
+    
+    def smazat_rear(self):
+        
+        self._veta.remove(self._veta[0])
+        
+    def smazat_front(self):
+        
+        self._veta.pop(-1)
+        
+    def zjisti_delku(self):
+        
+        return len(self._veta)
+
+def main():
+    
+    palyndrom_1 = Palyndrom("jelenovipivonelej")
+    
+    while True:  
+    
+        if len(palyndrom_1._veta) != 1:
+        
+            if palyndrom_1.precti_front() == palyndrom_1.precti_rear():
+                print(palyndrom_1._veta)
+                palyndrom_1.smazat_rear()
+                palyndrom_1.smazat_front()
+                print(palyndrom_1._veta)
+                
+            else:
+                return print(False)
+    
+        else:
+            return print("jedna se o palyndrom")
+        
+        
+if __name__ == "__main__":
+    main()
